@@ -1,0 +1,11 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block content %}
+<h2>{{ flashcard.question }}</h2>
+<p>{{ flashcard.answer }}</p>
+{% if flashcard.ai_generated_explanation %}
+  <p><strong>AI Explanation:</strong> {{ flashcard.ai_generated_explanation }}</p>
+{% endif %}
+<a href="{% url 'flashcards_list' %}">Back to Flashcards List</a>
+{% endblock %}

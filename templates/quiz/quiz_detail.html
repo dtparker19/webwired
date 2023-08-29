@@ -1,0 +1,26 @@
+{% extends '_base.html' %}
+{% load static %}
+{% block content %}
+<h1>{{ quiz.title }}</h1>
+<p>{{ quiz.description }}</p>
+
+{% if question %}
+  <form method="post">
+    {% csrf_token %}
+    <input type="hidden" name="question_id" value="{{ question.id }}">
+    <fieldset>
+      <legend>{{ question.text }}</legend>
+      {% for answer in question.answer_set.all %}
+        <label>
+          <input type="radio" name="selected_answer" value="{{ answer.id }}">
+          {{ answer.text }}
+        </label><br>
+      {% endfor %}
+    </fieldset>
+    <button type="submit">Next Question</button>
+  </form>
+{% else %}
+  <p>Congratulations! You have completed the quiz.</p>
+{% endif %}
+
+{% endblock %}

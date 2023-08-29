@@ -1,0 +1,17 @@
+{% extends '_base.html' %}
+{% load static %}
+{% block content %}
+<h1>Study Plan</h1>
+<h2>{{ study_plan.target_certification }}</h2>
+<p>Start Date: {{ study_plan.start_date }}</p>
+<p>End Date: {{ study_plan.end_date }}</p>
+<p>Daily Study Time: {{ study_plan.daily_study_time }} minutes</p>
+<h3>Flashcards to Review</h3>
+<ul>
+  {% for study_plan_flashcard in study_plan.studyplanflashcard_set.all %}
+    {% if not study_plan_flashcard.learned %}
+      <li><a href="{% url 'flashcard_detail' study_plan_flashcard.flashcard.id %}">{{ study_plan_flashcard.flashcard.question }}</a></li>
+    {% endif %}
+  {% endfor %}
+</ul>
+{% endblock %}
